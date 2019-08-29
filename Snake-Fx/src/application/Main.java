@@ -12,25 +12,28 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 
 public class Main extends Application {
+	
 	private Canvas mainCanvas;
 	private GraphicsContext context;
 	private Scene scene;
-
+	private Label label;
 	private Snake player;
 	private PowerUp powerUp;
 	private AnimationTimer loop;
-	private double playerSpeed = 30;
+	private double playerSpeed = 30, score=0;
 
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 
 			BorderPane root = FXMLLoader.load(getClass().getResource("/Main.fxml"));
+			label=(Label)root.getTop();
 			mainCanvas = (Canvas) root.getCenter();
 			context = mainCanvas.getGraphicsContext2D();
 			Game.width = 800;
@@ -38,7 +41,7 @@ public class Main extends Application {
 			scene = new Scene(root);
 			setupGame();
 			runGame();
-
+			
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
@@ -97,6 +100,7 @@ public class Main extends Application {
 			}
 
 		});
+		score=0;
 	}
 
 	public void runGame() {
@@ -123,6 +127,8 @@ public class Main extends Application {
 					if (powerUp.isEaten()) {
 						powerUp.spawn();
 						player.setGrow(true);
+						score++;
+						label.setText("Score : "+score+"");
 					}
 					if (player.getPossitionX() + player.getWidth() > Game.width) {
 						player.setPossitionX(0);

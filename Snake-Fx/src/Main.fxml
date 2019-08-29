@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.canvas.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <Canvas height="600.0" width="800.0" BorderPane.alignment="CENTER" />
    </center>
+   <top>
+      <Label fx:id="score" text="Score" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+   </top>
 </BorderPane>
